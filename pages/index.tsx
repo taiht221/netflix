@@ -22,6 +22,7 @@ const Home = ({
       <Head>
         <title>Netflix</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content="https://rb.gy/p2hphi"></meta>
       </Head>
       <Header />
 
