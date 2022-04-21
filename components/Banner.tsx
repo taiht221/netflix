@@ -4,6 +4,7 @@ import { baseUrl } from '../constants'
 import { Movie } from '../models'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import { FaPlay } from 'react-icons/fa'
+import useAuth from '../hooks/useAuth'
 
 interface BannerProps {
   netflixOriginals: Movie[]
@@ -11,6 +12,7 @@ interface BannerProps {
 
 export default function Banner({ netflixOriginals }: BannerProps) {
   const [movie, setMovie] = useState<Movie | null>(null)
+  const { logout } = useAuth()
   useEffect(() => {
     setMovie(
       netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]

@@ -1,9 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRecoilValue } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
 import Category from '../components/Category'
 import Header from '../components/Header'
+import Modal from '../components/Modal'
+import useAuth from '../hooks/useAuth'
 import { MovieList } from '../models'
 import requests from '../utils/request'
 
@@ -17,6 +21,10 @@ const Home = ({
   topRated,
   trendingNow,
 }: MovieList) => {
+  const { logout, loading } = useAuth()
+  const showModal = useRecoilValue(modalState)
+
+  if (loading) return null
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
       <Head>
@@ -39,6 +47,7 @@ const Home = ({
           <Category title="Documentaries" movies={documentaries}></Category>
         </section>
       </main>
+      {showModal && <Modal />}
     </div>
   )
 }
