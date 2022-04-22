@@ -5,6 +5,8 @@ import { Movie } from '../models'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import { FaPlay } from 'react-icons/fa'
 import useAuth from '../hooks/useAuth'
+import { modalState, movieState } from '../atoms/modalAtom'
+import { useRecoilState } from 'recoil'
 
 interface BannerProps {
   netflixOriginals: Movie[]
@@ -12,6 +14,9 @@ interface BannerProps {
 
 export default function Banner({ netflixOriginals }: BannerProps) {
   const [movie, setMovie] = useState<Movie | null>(null)
+  const [showModal, setShowModal] = useRecoilState(modalState)
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+
   const { logout } = useAuth()
   useEffect(() => {
     setMovie(
@@ -44,10 +49,10 @@ export default function Banner({ netflixOriginals }: BannerProps) {
 
         <button
           className="bannerButton bg-[gray]/70"
-          //   onClick={() => {
-          //     setCurrentMovie(movie)
-          //     setShowModal(true)
-          //   }}
+          onClick={() => {
+            setCurrentMovie(movie)
+            setShowModal(true)
+          }}
         >
           <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8" /> More Info
         </button>
